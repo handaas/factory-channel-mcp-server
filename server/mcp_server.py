@@ -59,7 +59,7 @@ def call_api(product_id: str, params: dict) -> dict:
     url = f'https://console.handaas.com/api/v1/integrator/call_api/{INTEGRATOR_ID}'
     try:
         response = requests.post(url, data=call_params)
-        return response.json().get("data", "查询为空")
+        return response.json().get("data", None) or response.json().get("msgCN", None)
     except Exception as e:
         return "查询失败"
     
@@ -113,7 +113,7 @@ def channel_insight_channel_analysis(matchKeyword: str, keywordType: str = None)
 
 
 @mcp.tool()
-def channel_insight_fuzzy_search(matchKeyword: str, pageIndex: int = None, pageSize: int = None) -> dict:
+def channel_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize: int = None) -> dict:
     """
     该接口的功能是根据提供的企业名称、人名、品牌、产品、岗位等关键词模糊查询相关企业列表。返回匹配的企业列表及其详细信息，用于查找和识别特定的企业信息。
 
@@ -170,7 +170,7 @@ def channel_insight_fuzzy_search(matchKeyword: str, pageIndex: int = None, pageS
 
 
 @mcp.tool()
-def channel_insight_channel_search(matchKeyword: str, address: str = None, keywordType: str = None, pageIndex: int = None,
+def channel_insight_channel_search(matchKeyword: str, address: str = None, keywordType: str = None, pageIndex: int = 1,
                    channelTradeType: str = None, pageSize: int = None) -> dict:
     """
     该接口的功能是根据输入的工厂名称或产品名称以及指定的搜索条件，提供匹配的企业信息列表，包括企业基本信息及主营产品等。此接口可能用于在供应链管理平台或B2B采购平台中，帮助采购商快速定位符合特定条件的供应商，进行商业合作洽谈或市场调查。
