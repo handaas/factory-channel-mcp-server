@@ -173,7 +173,6 @@ python server/mcp_server.py streamable-http
 
 **返回值**:
 - `total`: 总数 - 最多返回10W家
-- `resultList`: 结果列表
   - `nameId`: 企业id
   - `name`: 企业名称
   - `foundTime`: 成立日期

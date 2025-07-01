@@ -125,7 +125,6 @@ def channel_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize
 
     返回参数:
     - total: 总数 类型：int
-    - resultList: 结果列表 类型：list of dict
     - annualTurnover: 年营业额 类型：string
     - formerNames: 曾用名 类型：list of string
     - address: 注册地址 类型：string
@@ -195,7 +194,6 @@ def channel_insight_channel_search(matchKeyword: str, address: str = None, keywo
     - regCapital: 注册资本 类型：dict
     - nameId: 企业id 类型：string
     - tagNames: 产品类目 类型：list of string
-    - resultList: 结果列表 类型：list of dict
     """
     # 构建请求参数
     params = {
