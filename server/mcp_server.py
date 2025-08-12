@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 import sys
 
 load_dotenv()
-mcp = FastMCP("渠道信息分析洞察", instructions="渠道信息分析洞察",dependencies=["python-dotenv", "requests"])
+mcp = FastMCP("渠道信息分析洞察", instructions="渠道信息分析洞察", dependencies=["python-dotenv", "requests"])
 
 INTEGRATOR_ID = os.environ.get("INTEGRATOR_ID")
 SECRET_ID = os.environ.get("SECRET_ID")
@@ -78,30 +78,30 @@ def channel_insight_channel_analysis(matchKeyword: str, keywordType: str = None)
     - keywordType: 主体类型 类型：select - 主体类型枚举（name：企业名称，nameId：企业id，regNumber：注册号，socialCreditCode：统一社会信用代码）
 
     返回参数:
-    - categoryCount: 同行总数 类型：int
     - data: 同行年营业额数据 类型：list of dict
-    - financialStat: 资金实力分析 类型：dict
-    - name: 数据范围 类型：string
-    - ratio: 同行比例 类型：float
-    - power: 同行数量 类型：int
-    - regCapitalRank: 注册资本排名 类型：int - 显示注册资本超过同行的数量
-    - name: 数据范围 类型：string
     - productBrandList: 品牌占比 类型：list of dict
-    - number: 数量 类型：int
-    - regCapitalScope: 所在注册资本范围 类型：string
-    - name: 数据范围 类型：string
-    - number: 数量 类型：int
-    - ratio: 同行比例 类型：float
-    - ratio: 同行比例 类型：float
-    - salesStat: 销量实力分析 类型：dict
-    - annualTurnoverRank: 年营业排名 类型：int - 显示营业额超过同行的数量
+        - number: 数量 类型：int
+        - name: 数据范围 类型：string
+        - ratio: 同行比例 类型：float
     - productCategoryList: 品类占比 类型：list of dict
-    - annualTurnoverScope: 所在年营业额范围 类型：string
+        - number: 数量 类型：int
+        - ratio: 同行比例 类型：float
+    - financialStat: 资金实力分析 类型：dict
+        - categoryCount: 同行总数 类型：int
+        - regCapitalRank: 注册资本排名 类型：int - 显示注册资本超过同行的数量
+        - regCapitalScope: 所在注册资本范围 类型：string
+    - salesStat: 销量实力分析 类型：dict
+        - annualTurnoverRank: 年营业排名 类型：int - 显示营业额超过同行的数量
+        - annualTurnoverScope: 所在年营业额范围 类型：string
+        - categoryCount: 同行总数 类型：int
+    - name: 数据范围 类型：string
+    - ratio: 同行比例 类型：float
+    - power: 同行数量 类型：int
+    - name: 数据范围 类型：string
+    - ratio: 同行比例 类型：float
     - data: 同行年营业额数据 类型：list of dict
     - name: 数据范围 类型：string
-    - categoryCount: 同行总数 类型：int
     - power: 同行数量 类型：int
-    - ratio: 同行比例 类型：float
     """
     # 构建请求参数
     params = {
@@ -117,49 +117,49 @@ def channel_insight_channel_analysis(matchKeyword: str, keywordType: str = None)
 
 
 @mcp.tool()
-def channel_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize: int = None) -> dict:
+def channel_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize: int = 50) -> dict:
     """
     该接口的功能是根据提供的企业名称、人名、品牌、产品、岗位等关键词模糊查询相关企业列表。返回匹配的企业列表及其详细信息，用于查找和识别特定的企业信息。
 
 
     请求参数:
     - matchKeyword: 匹配关键词 类型：string - 查询各类信息包含匹配关键词的企业
-    - pageIndex: 分页开始位置 类型：int
+    - pageIndex: 分页开始位置 类型：int - 默认从1开始
     - pageSize: 分页结束位置 类型：int - 一页最多获取50条数据
 
     返回参数:
     - total: 总数 类型：int
-    - annualTurnover: 年营业额 类型：string
-    - formerNames: 曾用名 类型：list of string
-    - address: 注册地址 类型：string
-    - foundTime: 成立时间 类型：string
-    - enterpriseType: 企业主体类型 类型：string
-    - legalRepresentative: 法定代表人 类型：string
-    - homepage: 企业官网 类型：string
-    - legalRepresentativeId: 法定代表人id 类型：string
-    - prmtKeys: 推广关键词 类型：list of string
-    - operStatus: 企业状态 类型：string
-    - logo: 企业logo 类型：string
-    - nameId: 企业id 类型：string
-    - regCapitalCoinType: 注册资本币种 类型：string
-    - regCapitalValue: 注册资本金额 类型：int
-    - name: 企业名称 类型：string
-    - catchReason: 命中原因 类型：dict
-    - catchReason.name: 企业名称 类型：list of string
-    - catchReason.formerNames: 曾用名 类型：list of string
-    - catchReason.holderList: 股东 类型：list of string
-    - catchReason.recruitingName: 招聘岗位 类型：list of string
-    - catchReason.address: 地址 类型：list of string
-    - catchReason.operBrandList: 品牌 类型：list of string
-    - catchReason.goodsNameList: 产品名称 类型：list of string
-    - catchReason.phoneList: 固话 类型：list of string
-    - catchReason.emailList: 邮箱 类型：list of string
-    - catchReason.mobileList: 手机 类型：list of string
-    - catchReason.patentNameList: 专利 类型：list of string
-    - catchReason.certNameList: 资质证书 类型：list of string
-    - catchReason.prmtKeys: 推广关键词 类型：list of string
-    - catchReason.socialCreditCode: 统一社会信用代码 类型：list of string
-
+    - resultList:查询返回企业信息列表 类型：list of dict:
+        - annualTurnover: 年营业额 类型：string
+        - formerNames: 曾用名 类型：list of string
+        - address: 注册地址 类型：string
+        - foundTime: 成立时间 类型：string
+        - enterpriseType: 企业主体类型 类型：string
+        - legalRepresentative: 法定代表人 类型：string
+        - legalRepresentativeId: 法定代表人id 类型：string
+        - homepage: 企业官网 类型：string
+        - prmtKeys: 推广关键词 类型：list of string
+        - operStatus: 企业状态 类型：string
+        - logo: 企业logo 类型：string
+        - nameId: 企业id 类型：string
+        - regCapitalCoinType: 注册资本币种 类型：string
+        - regCapitalValue: 注册资本金额 类型：int
+        - name: 企业名称 类型：string
+        - catchReason: 命中原因 类型：dict
+            - catchReason.name: 企业名称 类型：list of string
+            - catchReason.formerNames: 曾用名 类型：list of string
+            - catchReason.holderList: 股东 类型：list of string
+            - catchReason.recruitingName: 招聘岗位 类型：list of string
+            - catchReason.address: 地址 类型：list of string
+            - catchReason.operBrandList: 品牌 类型：list of string
+            - catchReason.goodsNameList: 产品名称 类型：list of string
+            - catchReason.phoneList: 固话 类型：list of string
+            - catchReason.emailList: 邮箱 类型：list of string
+            - catchReason.mobileList: 手机 类型：list of string
+            - catchReason.patentNameList: 专利 类型：list of string
+            - catchReason.certNameList: 资质证书 类型：list of string
+            - catchReason.prmtKeys: 推广关键词 类型：list of string
+            - catchReason.socialCreditCode: 统一社会信用代码 类型：list of string
     """
     # 构建请求参数
     params = {
@@ -177,27 +177,28 @@ def channel_insight_fuzzy_search(matchKeyword: str, pageIndex: int = 1, pageSize
 
 @mcp.tool()
 def channel_insight_channel_search(matchKeyword: str, address: str = None, keywordType: str = None, pageIndex: int = 1,
-                   channelTradeType: str = None, pageSize: int = None) -> dict:
+                   channelTradeType: str = None, pageSize: int = 10) -> dict:
     """
     该接口的功能是根据输入的工厂名称或产品名称以及指定的搜索条件，提供匹配的企业信息列表，包括企业基本信息及主营产品等。此接口可能用于在供应链管理平台或B2B采购平台中，帮助采购商快速定位符合特定条件的供应商，进行商业合作洽谈或市场调查。
 
 
     请求参数:
-    - address: 地区 类型：list of list - 参考格式：[["广东省","中山市"],["广东省","潮州市"]]
+    - address: 地区 类型：list of list - 一般地区参考格式："["福建省",["贵州省","安顺市","平坝县"]]"，四个直辖市为："[["北京"]]"、"[["上海"]]"、"[["天津"]]"、"[["重庆"]]"
     - keywordType: 搜索类型 类型：select - 搜索类型枚举（综合搜索，主营产品）
-    - matchKeyword: 匹配关键词 类型：string - 工厂名称或产品名称（搜索多个词，使用顿号隔开，如"北京、上海"）
-    - pageIndex: 页码 类型：int - 从1开始
-    - channelTradeType: 销售模式 类型：select - 销售模式枚举（全部，外贸，内贸）
+    - matchKeyword: 匹配关键词 类型：string - 地址、工厂名称和产品名称（支持搜索多个关键词组合，中间必须使用顿号隔开，如"北京、金融"）
+    - pageIndex: 页码 类型：int - 默认从1开始
+    - channelTradeType: 销售模式 类型：select - 销售模式枚举（全部，外贸，内贸）,默认为："全部"
     - pageSize: 分页大小 类型：int - 一页最多获取50条数据
 
     返回参数:
     - total: 总数 类型：int - 最多返回10W家
-    - mainProducts: 主营产品 类型：list of string
-    - foundTime: 成立日期 类型：string
-    - name: 企业名称 类型：string
-    - regCapital: 注册资本 类型：dict
-    - nameId: 企业id 类型：string
-    - tagNames: 产品类目 类型：list of string
+    - resultList: 结果列表 类型：list of dict
+        - mainProducts: 主营产品 类型：list of string
+        - foundTime: 成立日期 类型：string
+        - name: 企业名称 类型：string
+        - regCapital: 注册资本 类型：dict
+        - nameId: 企业id 类型：string
+        - tagNames: 产品类目 类型：list of string
     """
     # 构建请求参数
     params = {
