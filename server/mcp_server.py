@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 import sys
 
 load_dotenv()
-mcp = FastMCP("渠道信息分析洞察", instructions="渠道信息分析洞察",dependencies=["python-dotenv", "requests"])
+mcp = FastMCP("渠道资源管理", instructions="渠道资源管理",dependencies=["python-dotenv", "requests"])
 
 INTEGRATOR_ID = os.environ.get("INTEGRATOR_ID")
 SECRET_ID = os.environ.get("SECRET_ID")
